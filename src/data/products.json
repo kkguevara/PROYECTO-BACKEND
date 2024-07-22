@@ -1,0 +1,39 @@
+[
+  {
+    "id": "715810cb-14cf-4761-8e28-febc86f186e4",
+    "title": "CALCU TINY BLOCKS",
+    "description": "cabernet-franc gran reserva",
+    "code": "TSHIRT001",
+    "price": 50,
+    "status": true,
+    "stock": 60,
+    "category": "cabernet-franc",
+    "thumbnails": [
+      "./src/public/img/cabernet-franc/calcu-tiny-blocks.jpg"
+    ]
+  },
+  {
+    "id": "2de2aa39-d0fe-4872-b9b6-52216a63d8a4",
+    "title": "MAQUIS FRANCO CF",
+    "description": "MAQUIS FRANCO CF 2010",
+    "code": "TSHIRT002",
+    "price": 45,
+    "status": true,
+    "stock": 50,
+    "category": "cabernet-franc",
+    "thumbnails": [
+      "./src/public/img/cabernet-franc/maquis-franco.jpg"
+    ]
+  },
+  {
+    "id": "7232230a-99b0-4022-9916-15e4c5ec00ea",
+    "title": "MAQUIS GRAN RVA CF",
+    "description": "MAQUIS GRAN RVA GRAN RESERVA",
+    "code": "TSHIRT003",
+    "price": 55,
+    "status": true,
+    "stock": 70,
+    "category": "cabernet-franc",
+    "thumbnails": []
+  }
+]
