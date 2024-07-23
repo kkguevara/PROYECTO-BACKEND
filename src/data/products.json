@@ -1,18 +1,5 @@
 [
   {
-    "id": "715810cb-14cf-4761-8e28-febc86f186e4",
-    "title": "CALCU TINY BLOCKS",
-    "description": "cabernet-franc gran reserva",
-    "code": "TSHIRT001",
-    "price": 50,
-    "status": true,
-    "stock": 60,
-    "category": "cabernet-franc",
-    "thumbnails": [
-      "./src/public/img/cabernet-franc/calcu-tiny-blocks.jpg"
-    ]
-  },
-  {
     "id": "2de2aa39-d0fe-4872-b9b6-52216a63d8a4",
     "title": "MAQUIS FRANCO CF",
     "description": "MAQUIS FRANCO CF 2010",
@@ -34,6 +21,17 @@
     "status": true,
     "stock": 70,
     "category": "cabernet-franc",
+    "thumbnails": []
+  },
+  {
+    "id": "27c06303-2909-4423-b46a-1cebb96878c7",
+    "title": "ESCUDO ROJO GRAN RESERVA",
+    "description": "ESCUDO ROJO GRAN RESERVA CABERNET SAUVIGNON 750 ML",
+    "code": "TSHIRT004",
+    "price": 13,
+    "status": true,
+    "stock": 100,
+    "category": "cabernet-sauvignon",
     "thumbnails": []
   }
 ]
