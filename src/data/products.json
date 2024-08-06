@@ -11,27 +11,5 @@
     "thumbnails": [
       "./src/public/img/cabernet-franc/maquis-franco.jpg"
     ]
-  },
-  {
-    "id": "7232230a-99b0-4022-9916-15e4c5ec00ea",
-    "title": "MAQUIS GRAN RVA CF",
-    "description": "MAQUIS GRAN RVA GRAN RESERVA",
-    "code": "TSHIRT003",
-    "price": 55,
-    "status": true,
-    "stock": 70,
-    "category": "cabernet-franc",
-    "thumbnails": []
-  },
-  {
-    "id": "27c06303-2909-4423-b46a-1cebb96878c7",
-    "title": "ESCUDO ROJO GRAN RESERVA",
-    "description": "ESCUDO ROJO GRAN RESERVA CABERNET SAUVIGNON 750 ML",
-    "code": "TSHIRT004",
-    "price": 13,
-    "status": true,
-    "stock": 100,
-    "category": "cabernet-sauvignon",
-    "thumbnails": []
   }
 ]
