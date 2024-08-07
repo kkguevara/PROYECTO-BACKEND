@@ -6,7 +6,7 @@ socket.on("productos", (data) => {
     renderProducts(data);
 })
 
-// funcion que se encargue de modificar el dom, para agregar los productos 
+// modifica el dom, para agregar los productos 
 
 const renderProducts = (products) => {
     const containerProducts = document.getElementById("containerProducts");

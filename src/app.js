@@ -2,8 +2,8 @@ import express from "express";
 import cartsRouter from "./routes/carts.router.js";
 import productsRouter from "./routes/products.router.js";
 import viewsRouter from "./routes/views.router.js";
-import { engine } from "express-handlebars"; // importamos handlebars 
-import { Server } from "socket.io"; //importamos server de socket.io
+import { engine } from "express-handlebars";
+import { Server } from "socket.io";
 import ProductManager from "./controllers/product.manager.js";
 
 const manager = new ProductManager("./src/data/products.json");
@@ -11,18 +11,18 @@ const manager = new ProductManager("./src/data/products.json");
 const app = express();
 const PUERTO = 8080;
 
-// configuramos Express-Handelebars (aqui ok)
+// configuramos Express-Handelebars
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
-app.set("views", "./src/views") // carpeta donde se encuentra las vistas 
+app.set("views", "./src/views");
 
 
 // Middleware para manejar JSON
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static("./src/public")); //aqui
+app.use(express.static("./src/public")); 
 
 // Usar routers
 
@@ -41,8 +41,6 @@ const io = new Server(httpServer);
 io.on("connection", async (socket) => {
   console.log("Un cliente se conectó");
 
- //le envian el array de productos a la vista realtimeproducts
- //con un evento y el metodo "on" lo escucha desde el main.js
   socket.emit("productos", await manager.getProducts())
 
   socket.on("deleteProduct", async(id) => {
