@@ -1,23 +1,21 @@
-
 <h1>Mis Productos</h1>
 
-<div class="contenedorProductos" id="lista-usuarios" >
-    {{#each arrayProducts}}
-        <div class="card">
-            <p> {{this.title}} </p>
-            <p> {{this.description}} </p>
-            <p> {{this.code}} </p>
-            <p> {{this.price}} </p>
-            <p> {{this.status}} </p>
-            <p> {{this.stock}} </p>
-            <p> {{this.category}} </p>
-            <button> Comprar </button>
-        </div>
-    {{/each}}
+<div id="containerProducts">
+  {{#each arrayProducts}}
+    <div class="card">
+      <p> {{this.title}} </p>
+      <p> {{this.description}} </p>
+      <p> {{this.code}} </p>
+      <p> {{this.price}} </p>
+      <p> {{this.stock}} </p>
+      <p> {{this.category}} </p>
+      <button> Comprar </button>
+    </div>
+  {{/each}}
 </div>
 
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"
+></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
-
-<script src="js/main.js"></script> 
+<script src="js/main.js"></script>
