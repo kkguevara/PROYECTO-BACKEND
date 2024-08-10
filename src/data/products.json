@@ -11,5 +11,16 @@
     "thumbnails": [
       "./src/public/img/cabernet-franc/maquis-franco.jpg"
     ]
+  },
+  {
+    "id": "83fb5fd6-87f2-4d7b-9551-c59e45274c8f",
+    "title": "vino",
+    "description": "jdsfhskj",
+    "code": "eejh",
+    "price": 78,
+    "status": true,
+    "stock": 7656,
+    "category": "kjhnjkk",
+    "thumbnails": []
   }
 ]
