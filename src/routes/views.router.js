@@ -6,20 +6,17 @@ import ProductManager from "../controllers/product.manager.js";
 const router = express.Router();
 const manager = new ProductManager("./src/data/products.json");
 
-//Ruta products que me muestra el listado actual de mis productos. Utilizando express-handlebars. 
+//Ruta products que me muestra el listado actual de mis productos. Utilizando express-handlebars.
 
 router.get("/products", async (req, res) => {
+  const arrayProducts = await manager.getProducts();
+  res.render("home", { arrayProducts });
+});
 
-    const arrayProducts = await manager.getProducts();
-    res.render("home", { arrayProducts })
+// muestra los produtos en tiempo real con formulario para agregar y boton de eliminar
 
-})
-
-// muestra los produtos en tiempo real con formulario para agregar y boton de eliminar 
-
-router.get("/realtimeproducts", (req, res) => {
-    res.render("realtimeproducts")
-})
-
+router.get("/realtimeproducts", async (req, res) => {
+  res.render("realtimeproducts");
+});
 
 export default router;

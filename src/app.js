@@ -17,12 +17,11 @@ app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
-
 // Middleware para manejar JSON
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static("./src/public")); 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("./src/public"));
 
 // Usar routers
 
@@ -30,7 +29,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
 
-const httpServer = app.listen(PUERTO, () => { 
+const httpServer = app.listen(PUERTO, () => {
   console.log(`Servidor escuchando en el puerto ${PUERTO}`);
 });
 
@@ -41,12 +40,20 @@ const io = new Server(httpServer);
 io.on("connection", async (socket) => {
   console.log("Un cliente se conectó");
 
-  socket.emit("productos", await manager.getProducts())
+  socket.emit("products", await manager.getProducts());
 
-  socket.on("deleteProduct", async(id) => {
+  socket.on("deleteProduct", async (id) => {
     await manager.deleteProduct(id);
 
-    io.sockets.emit("products", await manager.getProducts())
-  })
+    io.emit("products", await manager.getProducts());
+  });
 
-})
+  /*** Add product ***/
+  socket.on("product", async (data) => {
+    await manager.createProduct(data);
+    //*** Reload products ***/
+    io.emit("products", await manager.getProducts());
+
+    console.log(data);
+  });
+});
