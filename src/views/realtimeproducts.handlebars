@@ -1,55 +1,92 @@
-{{!  mostrar todos los productos en tiempo real  }}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Productos</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {{!  mostrar todos los productos en tiempo real  }}
 
-<h1>Mis Productos</h1>
+    <div class="container mt-4">
+      <h1 class="text-center mb-4">Mis Productos</h1>
 
-<form id="productForm" action="submit" method="post">
-  <input
-    type="text"
-    id="productTitle"
-    name="title"
-    placeholder="Título"
-    required
-  />
-  <input
-    type="text"
-    id="productDescription"
-    placeholder="Descripción"
-    name="description"
-    required
-  />
-  <input
-    type="text"
-    id="productCode"
-    name="code"
-    placeholder="Código"
-    required
-  />
-  <input
-    type="number"
-    id="productStock"
-    name="stock"
-    placeholder="Stock"
-    required
-  />
-  <input
-    type="text"
-    id="productCategory"
-    name="category"
-    placeholder="Categoría"
-    required
-  />
-  <input
-    type="number"
-    id="productPrice"
-    name="price"
-    placeholder="Precio"
-    required
-  />
-  <button type="submit">Crear Producto</button>
-</form>
-<div id="containerAddProducts"></div>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"
-></script>
+      <form id="productForm" action="submit" method="post" class="mb-4">
+        <div class="form-group">
+          <input
+            type="text"
+            id="productTitle"
+            name="title"
+            placeholder="Título"
+            required
+            class="form-control mb-2"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="productDescription"
+            placeholder="Descripción"
+            name="description"
+            required
+            class="form-control mb-2"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="productCode"
+            name="code"
+            placeholder="Código"
+            required
+            class="form-control mb-2"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            id="productStock"
+            name="stock"
+            placeholder="Stock"
+            required
+            class="form-control mb-2"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="productCategory"
+            name="category"
+            placeholder="Categoría"
+            required
+            class="form-control mb-2"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            id="productPrice"
+            name="price"
+            placeholder="Precio"
+            required
+            class="form-control mb-2"
+          />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Crear Producto</button>
+        </div>
+      </form>
 
-<script src="js/main.js"></script>
+      <div id="containerAddProducts" class="mt-4"></div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"
+    ></script>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
-import fs from 'fs/promises';
+import { v4 as uuidv4 } from "uuid";
+import fs from "fs/promises";
 
 class CartManager {
   constructor(path) {
@@ -10,12 +10,12 @@ class CartManager {
     const result = {
       status: 0,
       message: "",
-      data: []
-    }
+      data: [],
+    };
 
     const newCart = {
       id: uuidv4(),
-      products: []
+      products: [],
     };
 
     try {
@@ -27,7 +27,7 @@ class CartManager {
       result.status = 201;
       return result;
     } catch (error) {
-      result.message = 'Error al crear el carrito: ' + error.message;
+      result.message = "Error al crear el carrito: " + error.message;
       result.status = 500;
       return result;
     }
@@ -50,7 +50,7 @@ class CartManager {
   async getCartById(id) {
     try {
       const carts = await this.leerArchivo();
-      const soughtCart = carts.find(cart => cart.id === id);
+      const soughtCart = carts.find((cart) => cart.id === id);
 
       if (!soughtCart) {
         throw new Error("Carrito no encontrado");
@@ -67,7 +67,7 @@ class CartManager {
   async addProductToCart(cartId, product) {
     try {
       const carts = await this.leerArchivo();
-      const cartIndex = carts.findIndex(cart => cart.id === cartId);
+      const cartIndex = carts.findIndex((cart) => cart.id === cartId);
 
       if (cartIndex === -1) {
         throw new Error("Carrito no encontrado");
@@ -82,7 +82,6 @@ class CartManager {
       throw error;
     }
   }
-
 
   // Método para leer el archivo de carritos
 

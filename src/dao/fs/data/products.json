@@ -1,0 +1,13 @@
+[
+  {
+    "id": "5a019a9b-147a-443b-a57b-fa29b54125f6",
+    "title": "vino",
+    "description": "vino tinto",
+    "code": "121212",
+    "price": 18000,
+    "status": true,
+    "stock": 10,
+    "category": "vino tinto",
+    "thumbnails": []
+  }
+]

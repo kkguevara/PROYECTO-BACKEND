@@ -2,18 +2,26 @@ import express from "express";
 import cartsRouter from "./routes/carts.router.js";
 import productsRouter from "./routes/products.router.js";
 import viewsRouter from "./routes/views.router.js";
-import { engine } from "express-handlebars";
+import exphbs from "express-handlebars";
 import { Server } from "socket.io";
-import ProductManager from "./controllers/product.manager.js";
+import multer from "multer";
+import ProductManager from "./dao/db/product-manager-db.js";
+import "./database.js";
 
-const manager = new ProductManager("./src/data/products.json");
+const manager = new ProductManager();
 
 const app = express();
 const PUERTO = 8080;
 
-// configuramos Express-Handelebars
-
-app.engine("handlebars", engine());
+//Configuramos express-handlebars:
+app.engine(
+  "handlebars",
+  exphbs.engine({
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+    },
+  })
+);
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
@@ -23,11 +31,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./src/public"));
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./src/public/img");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+app.use(multer({ storage }).single("image"));
+
 // Usar routers
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
+//app.use("/,imageRouter");
 
 const httpServer = app.listen(PUERTO, () => {
   console.log(`Servidor escuchando en el puerto ${PUERTO}`);

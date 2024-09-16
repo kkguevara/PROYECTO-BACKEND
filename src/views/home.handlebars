@@ -1,17 +1,48 @@
-<h1>Mis Productos</h1>
+<h1 class="text-center my-4">Mis Productos</h1>
 
-<div id="containerProducts">
-  {{#each arrayProducts}}
-    <div class="card">
-      <p> {{this.title}} </p>
-      <p> {{this.description}} </p>
-      <p> {{this.code}} </p>
-      <p> {{this.price}} </p>
-      <p> {{this.stock}} </p>
-      <p> {{this.category}} </p>
-      <button> Comprar </button>
-    </div>
-  {{/each}}
+<div id="containerProducts" class="container">
+  <div class="row justify-content-around align-items-stretch">
+    {{#each arrayProducts}}
+      <div class="col-md-4 mb-3 d-flex">
+        <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <p><strong>Título:</strong>{{this.title}}</p>
+            <p><strong>descripción:</strong>{{this.description}}</p>
+            <p><strong>Código:</strong> {{this.code}}</p>
+            <p><strong>Precio:</strong> ${{this.price}}</p>
+            <p><strong>Stock:</strong> {{this.stock}}</p>
+            <p><strong>Categoría:</strong> {{this.category}}</p>
+            <button
+              class="btn btn-primary"
+              onclick="addToCart('{{this._id}}')"
+            >Agregar al carrito</button>
+            <a
+              href="/containerProducts/{{this._id}}"
+              class="btn btn-secondary"
+            >Ver detalles</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<div class="pagination my-4 d-flex justify-content-center">
+  {{#if hasPrevPage}}
+    <a
+      href="/arrayProducts?page={{prevPage}}"
+      class="btn btn-outline-primary mx-2"
+    >Anterior</a>
+  {{/if}}
+
+  {{#if hasNextPage}}
+    <a
+      href="/arrayProducts?page={{nextPage}}"
+      class="btn btn-outline-primary mx-2"
+    >Siguiente</a>
+  {{/if}}
+
+  <p class="mt-3">Página {{currentPage}} de {{totalPages}}</p>
 </div>
 
 <script

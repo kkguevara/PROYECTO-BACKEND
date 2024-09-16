@@ -1,10 +1,12 @@
 import express from "express";
-import ProductManager from "../controllers/product.manager.js";
+import ProductManager from "../dao/db/product-manager-db.js";
+import CartManager from "../dao/db/product-manager-db.js";
 
 //import { Router } from "express";
 
 const router = express.Router();
-const manager = new ProductManager("./src/data/products.json");
+const manager = new ProductManager();
+const cartManager = new CartManager();
 
 //Ruta products que me muestra el listado actual de mis productos. Utilizando express-handlebars.
 
