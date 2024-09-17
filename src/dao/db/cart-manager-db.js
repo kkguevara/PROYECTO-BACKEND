@@ -1,37 +1,44 @@
 import CartModel from "../models/cart.model.js";
 
 class CartManager {
-  // Método para crear un nuevo carrito
   async createCart() {
     try {
       const newCart = new CartModel({ products: [] });
       await newCart.save();
       return newCart;
     } catch (error) {
-      console.error("Error al crear un carrito de compras:", error);
-      throw new Error("No se pudo crear el carrito de compras.");
+      throw new Error(
+        `No se pudo crear el carrito de compras, ${error.message}`
+      );
     }
   }
 
-  // Método para obtener un carrito por ID
-  async getCartById(cart) {
+  async getCarts() {
     try {
-      const cartId = await CartModel.findById(cart);
-      if (!cartId) {
+      const carts = await CartModel.find();
+      return carts;
+    } catch (error) {
+      throw new Error(`Error al buscar carritos: ${error.message}`);
+    }
+  }
+
+  async getCartById(cartId) {
+    try {
+      const cart = await CartModel.findById(cartId)
+        .populate("products.product")
+        .lean();
+      if (!cart) {
         throw new Error("No existe un carrito con ese ID.");
       }
-      return cartId;
+      return cart;
     } catch (error) {
-      console.error("Error al obtener el carrito por ID:", error);
-      throw new Error("No se pudo obtener el carrito.");
+      throw new Error(`No se pudo obtener el carrito, ${error.message}`);
     }
   }
-
-  // Método para agregar productos al carrito
 
   async addProductsToCart(cartId, productId, quantity = 1) {
     try {
-      const cart = await this.getCartById(cartId);
+      const cart = await CartModel.findById(cartId);
       const existsProduct = cart.products.find(
         (p) => p.product.toString() === productId
       );
@@ -43,105 +50,84 @@ class CartManager {
       }
 
       // Marcar la propiedad "products" como modificada antes de guardar
-
       cart.markModified("products");
       await cart.save();
       return cart;
     } catch (error) {
-      console.error("Error al agregar un producto:", error);
-      throw new Error("No se pudo agregar el producto al carrito.");
-    }
-  }
-
-  // Método para eliminar un producto del carrito
-
-  async deleteProductFromCart(req, res) {
-    const { cid, pid } = req.params;
-
-    try {
-      const cart = await CartModel.findById(cid);
-      cart.products = cart.products.filter(
-        (product) => product.product.toString() !== pid
+      throw new Error(
+        `No se pudo agregar el producto al carrito: ${error.message}`
       );
-      await cart.save();
-      res.json({ status: "éxito", message: "Producto eliminado del carrito" });
-    } catch (error) {
-      res.status(500).json({
-        status: "error",
-        message: "Error al eliminar el producto del carrito",
-        error,
-      });
     }
   }
-  // Método para actualizar el carrito con un arreglo de productos
 
-  async updateCart(req, res) {
-    const { cid } = req.params;
-    const { products } = req.body;
+  async deleteProductFromCart(cartId, prodId) {
+    try {
+      const cart = await CartModel.findById(cartId);
 
+      if (!cart) {
+        throw new Error(`Carrito con ID ${cartId} no encontrado`);
+      }
+
+      const productIndex = cart.products.findIndex(
+        (product) => product.product._id.toString() === prodId
+      );
+
+      if (productIndex === -1) {
+        throw new Error(
+          `Producto con ID ${prodId} no encontrado en el carrito`
+        );
+      }
+      const [deletedProduct] = cart.products.splice(productIndex, 1);
+
+      await cart.save();
+
+      return deletedProduct;
+    } catch (error) {
+      throw new Error(
+        `Error al eliminar el producto del carrito: ${error.message}`
+      );
+    }
+  }
+
+  async updateCart(cid, products) {
     try {
       const cart = await CartModel.findById(cid);
       cart.products = products;
-      await cart.save();
-      res.json({ status: "éxito", message: "Carrito actualizado" });
+      const resultUpdated = await cart.save();
+
+      return resultUpdated;
     } catch (error) {
-      res.status(500).json({
-        status: "error",
-        message: "Error al actualizar el carrito",
-        error,
-      });
+      throw new Error(`Error: ${error.message}`);
     }
   }
-  // Método para actualizar solo la cantidad de un producto en el carrito
-  async updateProductQuantity(req, res) {
-    const { cid, pid } = req.params;
-    const { quantity } = req.body;
 
+  async updateProductQuantity(cid, pid, quantity) {
     try {
       const cart = await CartModel.findById(cid);
       const product = cart.products.find(
-        (product) => product.productId.toString() === pid
+        (product) => product.product._id.toString() === pid
       );
-      if (product) {
-        product.quantity = quantity;
-        await cart.save();
-        res.json({
-          status: "éxito",
-          message: "Cantidad de producto actualizada",
-        });
-      } else {
-        res.status(404).json({
-          status: "error",
-          message: "Producto no encontrado en el carrito",
-        });
+
+      if (!product) {
+        throw new Error(`Producto con ID ${pid} no encontrado`);
       }
+
+      product.quantity = quantity;
+      await cart.save();
+
+      return cart;
     } catch (error) {
-      res.status(500).json({
-        status: "error",
-        message: "Error al actualizar la cantidad del producto",
-        error,
-      });
+      throw new Error(`${error.message}`);
     }
   }
 
-  // Método para eliminar todos los productos del carrito
-  async clearCart(req, res) {
-    const { cid } = req.params;
-
+  async clearCart(cid) {
     try {
       const cart = await CartModel.findById(cid);
       cart.products = [];
       await cart.save();
-      res.json({
-        status: "éxito",
-        message: "Todos los productos eliminados del carrito",
-      });
     } catch (error) {
-      res.status(500).json({
-        status: "error",
-        message: "Error al borrar el carrito",
-        error,
-      });
+      throw new Error(`${error.message}`);
     }
   }
 }

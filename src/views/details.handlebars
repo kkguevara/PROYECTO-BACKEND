@@ -1,0 +1,24 @@
+<section class="product-details py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">{{product.title}}</h1>
+            <h2 class="card-subtitle mb-2 text-muted">{{product.category}}</h2>
+            <p class="card-text">{{product.description}}</p>
+            <p class="card-text"><strong>Código:</strong> {{product.code}}</p>
+            <p class="card-text"><strong>Precio:</strong> ${{product.price}}</p>
+            <p class="card-text"><strong>Stock:</strong> {{product.stock}}</p>
+            <form
+              action="/api/carts/66e0eeeca4962ec94f311555/products/{{this._id}}"
+              method="POST"
+            >
+              <button class="btn btn-primary" type="submit">Agregar al carrito</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

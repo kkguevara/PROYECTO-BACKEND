@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
 
 const cartSchema = new mongoose.Schema({
   products: [
     {
       product: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Products",
+        required: true,
       },
       quantity: {
         type: Number,
-        required: true,
+        required: false,
       },
     },
   ],

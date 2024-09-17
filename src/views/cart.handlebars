@@ -1,0 +1,58 @@
+<h1 class="text-center mb-4">Carrito de Compras</h1>
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cart.products}}
+          <tr>
+            <td>{{this.product.title}}</td>
+            <td>
+              <input
+                type="number"
+                class="form-control quantity"
+                value="{{this.quantity}}"
+                min="1"
+                data-price="{{this.product.price}}"
+              />
+            </td>
+            <td class="price">{{this.product.price}}</td>
+            <td class="total"></td>
+
+          </tr>
+
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Resumen del Pedido</h5>
+        <p class="card-text"><strong>Total:</strong>
+          <span id="cart-total">$0.00</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => { const quantityInputs =
+  document.querySelectorAll('.quantity'); const totalElements =
+  document.querySelectorAll('.total'); const cartTotalElement =
+  document.getElementById('cart-total'); function updateTotals() { let cartTotal
+  = 0; quantityInputs.forEach((input, index) => { const quantity =
+  parseInt(input.value, 10); const price = parseFloat(input.dataset.price);
+  const total = price * quantity; totalElements[index].textContent =
+  `$${total.toFixed(2)}`; cartTotal += total; }); cartTotalElement.textContent =
+  `$${cartTotal.toFixed(2)}`; } quantityInputs.forEach(input => {
+  input.addEventListener('input', updateTotals); }); updateTotals(); });
+
+</script>

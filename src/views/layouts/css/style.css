@@ -1,0 +1,61 @@
+/* Estilo para el header */
+header {
+  margin-bottom: 2rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.navbar {
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #007bff;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #0056b3;
+}
+
+/* Estilo para las tarjetas */
+.custom-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.custom-card img {
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Efecto hover para tarjetas */
+.custom-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la paginación */
+.pagination {
+  margin-top: 2rem;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.page-link {
+  border-radius: 50%;
+}
