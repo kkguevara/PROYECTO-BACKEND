@@ -1,12 +1,17 @@
 import express from "express";
 import cartsRouter from "./routes/carts.router.js";
 import productsRouter from "./routes/products.router.js";
+import usersRouter from "./routes/users.router.js";
 import viewsRouter from "./routes/views.router.js";
 import exphbs from "express-handlebars";
 import { Server } from "socket.io";
 import multer from "multer";
 import ProductManager from "./dao/db/product-manager-db.js";
 import "./database.js";
+import cookieParser from "cookie-parser";
+import { engine } from "express-handlebars";
+import passport from "passport";
+import initializePassport from "./config/passport.config.js";
 
 const manager = new ProductManager();
 
@@ -22,6 +27,7 @@ app.engine(
     },
   })
 );
+app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
@@ -29,6 +35,9 @@ app.set("views", "./src/views");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+initializePassport();
+app.use(passport.initialize());
 app.use(express.static("./src/public"));
 
 const storage = multer.diskStorage({
@@ -45,6 +54,7 @@ app.use(multer({ storage }).single("image"));
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/sessions", usersRouter);
 app.use("/", viewsRouter);
 //app.use("/,imageRouter");
 

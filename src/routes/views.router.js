@@ -6,6 +6,14 @@ const router = express.Router();
 const manager = new ProductManager();
 const cartManager = new CartManager();
 
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
 //Ruta products que me muestra el listado actual de mis productos. Utilizando express-handlebars.
 
 router.get("/products", async (req, res) => {
@@ -55,6 +63,14 @@ router.get("/carts/:id", async (req, res) => {
 
 router.get("/realtimeproducts", async (req, res) => {
   res.render("realtimeproducts");
+});
+
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
 });
 
 export default router;
